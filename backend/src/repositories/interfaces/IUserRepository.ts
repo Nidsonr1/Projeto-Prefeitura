@@ -13,7 +13,7 @@ interface IUserRepository {
   findByEmail(email: string): Promise<User>;
   turnUserAdmin(id: string): Promise<void>;
   findById(id: string): Promise<User>
-  decrypt(password: string, salt: string): Promise<string>;
+  login(email: string, password: string, salt: string): Promise<User>;
 }
 
 export { ICreateUser, IUserRepository };

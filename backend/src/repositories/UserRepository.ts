@@ -61,14 +61,13 @@ class UserRepository implements IUserRepository {
     return user;
   }
 
-  async decrypt(password: string, salt: string): Promise<string> {
-    let hash = crypto.createHmac("sha512", salt)
-    hash.update(password);
-  
-    const decryptPassword = hash.digest("hex");
-    return decryptPassword;
-  }
+  async login(email: string, password: string, salt: string): Promise<User> {
+    const decryptPassword = await this.encryptPassword(password, salt);
 
+    const user = await this.userRepository.findOne({ password: decryptPassword });
+
+    return user
+  }
 }
 
 export { UserRepository }
