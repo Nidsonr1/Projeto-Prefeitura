@@ -22,7 +22,7 @@ class UserRepository implements IUserRepository {
       name,
       email,
       password: encrypted,
-      salt
+      salt,
     });
 
     await this.userRepository.save(user);

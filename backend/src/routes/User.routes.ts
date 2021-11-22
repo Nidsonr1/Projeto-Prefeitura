@@ -17,6 +17,6 @@ userRoutes.patch("/:id/admin", checkAdmin, (request, response) => {
 
 userRoutes.post('/login', (request, response) => {
   return loginUserController().handle(request, response);
-})
+});
 
 export { userRoutes }
