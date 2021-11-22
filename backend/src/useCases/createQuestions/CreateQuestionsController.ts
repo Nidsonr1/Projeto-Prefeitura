@@ -12,7 +12,7 @@ class CreateQuestionsController {
 
       return response.status(201).send();
     } catch (error) {
-      return response.status(500).send();
+      return response.status(403).json({ error: error.message });
     }
   }
 }

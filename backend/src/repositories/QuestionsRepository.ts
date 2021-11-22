@@ -20,6 +20,13 @@ class QuestionsRepository implements IQuestionRepository {
     const questions = await this.questionRepository.find();
     return questions;
   }
+
+
+  async findByDescription(description: string): Promise<Questions> {
+    const question = await this.questionRepository.findOne({ description });
+
+    return question;
+  }
 }
 
 export { QuestionsRepository }
