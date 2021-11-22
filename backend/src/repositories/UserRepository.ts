@@ -11,6 +11,7 @@ class UserRepository implements IUserRepository {
     this.userRepository = getRepository(User);
   }
   
+  /**Cria novo Usuário */
   async create(data: ICreateUser): Promise<void> {
     const { name, email, password } = data;
 
@@ -28,6 +29,7 @@ class UserRepository implements IUserRepository {
     await this.userRepository.save(user);
   }
 
+  /**Cria salt para senha criptografada */
   async salt(length: number): Promise<string> {
     const salt = crypto.randomBytes(Math.ceil(length/2))
       .toString("hex")
@@ -35,6 +37,7 @@ class UserRepository implements IUserRepository {
     return salt;
   }
 
+  /**Criptografa Senha do usuário */
   async encryptPassword(password: string, salt: string): Promise<string> {
     let hash = crypto.createHmac("sha512", salt)
     hash.update(password);
@@ -43,11 +46,13 @@ class UserRepository implements IUserRepository {
     return encryptPassword;
   }
 
+  /**Encontra um usuário a partir do Email */
   async findByEmail(email: string): Promise<User> {
     const user = await this.userRepository.findOne({ email });
     return user;
   }
   
+  /**Torna um usuário Admin */
   async turnUserAdmin(id: string): Promise<void> {
     await createQueryBuilder().update(User).set({
       admin: true
@@ -56,11 +61,13 @@ class UserRepository implements IUserRepository {
     .execute();
   }
 
+  /**Encontra um usuário pelo ID */
   async findById(id: string): Promise<User> {
     const user = await this.userRepository.findOne({ id });
     return user;
   }
 
+  /**Loga um usuário */
   async login(email: string, password: string, salt: string): Promise<User> {
     const decryptPassword = await this.encryptPassword(password, salt);
 

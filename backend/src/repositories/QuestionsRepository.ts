@@ -10,6 +10,7 @@ class QuestionsRepository implements IQuestionRepository {
     this.questionRepository = getRepository(Questions);
   }
   
+  /**Cria uma nova Questão */
   async create(description: string): Promise<void> {
     const question = this.questionRepository.create({ description });
 
