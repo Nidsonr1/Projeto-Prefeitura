@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
 export class CreateQuestions1637591418804 implements MigrationInterface {
 
@@ -25,6 +25,11 @@ export class CreateQuestions1637591418804 implements MigrationInterface {
                     name: "updated_at",
                     type: "timestamp",
                     default: "now()"
+                },
+                {
+                    name: "answersId",
+                    type: "uuid",
+                    isUnique: true
                 }
             ]
         }))
