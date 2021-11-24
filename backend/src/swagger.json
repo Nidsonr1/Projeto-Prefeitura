@@ -1,0 +1,44 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Welcome to the Prefeitura API",
+    "description": "",
+    "version": "1.0.0",
+    "contact": {
+      "email": ""
+    }
+  },
+  "paths": {
+    "/users/create": {
+      "post": {
+        "tag": ["Users"],
+        "sumary": "Cria um novo usuário",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Fabrício Carneiro",
+                  "email": "fabricio@example.com",
+                  "password": "carneirinho"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
