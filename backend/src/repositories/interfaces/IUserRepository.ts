@@ -6,6 +6,12 @@ interface ICreateUser {
   password: string;
 }
 
+interface IRequestProfile {
+  id: string;
+  name: string;
+  email: string;
+}
+
 interface IUserRepository {
   create(data: ICreateUser): Promise<void>;
   salt(length: number): Promise<string>;
@@ -14,6 +20,6 @@ interface IUserRepository {
   turnUserAdmin(id: string): Promise<void>;
   findById(id: string): Promise<User>
   login(email: string, password: string, salt: string): Promise<User>;
+  profile(id: string): Promise<IRequestProfile>;
 }
-
-export { ICreateUser, IUserRepository };
+export { ICreateUser, IUserRepository, IRequestProfile };

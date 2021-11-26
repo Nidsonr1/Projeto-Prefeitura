@@ -2,7 +2,7 @@ import crypto from 'crypto';
 import { createQueryBuilder, getRepository, Repository } from 'typeorm';
 
 import { User } from '../entities/User';
-import { IUserRepository, ICreateUser } from "./interfaces/IUserRepository";
+import { IUserRepository, ICreateUser, IRequestProfile } from "./interfaces/IUserRepository";
 
 class UserRepository implements IUserRepository {
   private userRepository: Repository<User>;
@@ -74,6 +74,12 @@ class UserRepository implements IUserRepository {
     const user = await this.userRepository.findOne({ password: decryptPassword });
 
     return user
+  }
+  
+  /**Retorna usuário para perfil*/
+  async profile(id: string): Promise<IRequestProfile> {
+    const  { name, email } = await this.userRepository.findOne({ id });
+    return { id, name, email}
   }
 }
 
